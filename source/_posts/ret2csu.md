@@ -1,9 +1,14 @@
 ---
+layout:     post
 title:      "ret2csu - A Return Oriented Programming Technique"
+date:       2020-04-13
+author:    "D4mianWayne"
+tag:      rop, bof, ret2csu, ctf
+category:  Return Oriented Programming
 ---
 
 
-This is an in-depth guide on ret2csu technique. I tried to make this article as much detailed as I could, including references and some binary to practice it with.
+This is an in-depth guide on `ret2csu` technique. I tried to make this article as much detailed as I could, including references and some binary to practice it with.
 
 
 # What is ret2csu?

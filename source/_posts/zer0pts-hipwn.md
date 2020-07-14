@@ -1,6 +1,12 @@
 ---
+layout:    post
 title:      "zer0ptsCTF - Hipwn Challenge"
+date:       2020-03-09
+author:     "D4mianwayne"
+tag:      rop, pwn, bof, syscall, zer0ctf
+category: CTF writeup
 ---
+
 
 
 Writeup on how I managed to solve [hipwn](/assets/hipwn) from [zer0ptsCTF](https://www.zer0pts.com).
