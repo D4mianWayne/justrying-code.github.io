@@ -178,8 +178,8 @@ clicklove:
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
   avatar: /medias/avatar.jpg
-  career: 软件工程师
-  introduction: 现实的抽象是语言，语言的抽象是程序，程序的抽象是数理逻辑，数理逻辑的抽象是超越认知的真理。
+  career: Student
+  introduction: Probably sitting somewhere and pwning binaries. Since becoming wordclass needs hard work ;)
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
@@ -187,36 +187,21 @@ profile:
 myProjects:
   enable: true
   data:
-    hexo-theme-matery:
+    roppy:
       icon: fas fa-rocket
       iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
-      url: http://github.com/blinkfox/hexo-theme-matery
-      desc: 一个采用 Material Design 和响应式设计的 Hexo 博客主题。
+      url: http://github.com/D4mianWayne/roppy
+      desc: Pwning Toolkit, I use it for almost everything
     Fenix:
-        icon: fas fa-database
+        icon: fas fa-cog
         iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
-        url: https://github.com/blinkfox/fenix
-        desc: 这是 Spring Data JPA 复杂或动态 SQL 查询的扩展库。
-    typora-vue-theme:
+        url: https://github.com/D4mianWayne/alfred
+        desc: Pentesting Toolkit
+    PwnLand:
         icon: fas fa-file-alt
         iconBackground: 'linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)'
-        url: https://github.com/blinkfox/typora-vue-theme
-        desc: 这是 Typora Markdown 编辑器的类似 Vue 文档风格的主题。
-    stalker:
-      icon: fas fa-compress
-      iconBackground: 'linear-gradient(135deg, #e079fc 0%, #7c44ff 100%)'
-      url: https://github.com/blinkfox/stalker
-      desc: 这是一个简单的用来对 Java 代码做性能评估的工具库。
-    mini-table:
-      icon: fas fa-table
-      iconBackground: 'linear-gradient(135deg, #309286 0%, #32dbc6 100%)'
-      url: https://github.com/blinkfox/mini-table
-      desc: 这是一个轻量级、零依赖、可定制化修改的 Java ASCII 表格生成库。
-    Java-Style:
-      icon: fas fa-coffee
-      iconBackground: 'linear-gradient(135deg, #ffeb3b 0%, #ff9900 100%)'
-      url: https://blinkfox.github.io/java-style
-      desc: Blinkfox Java 编程风格指南，包含 checkstyle 和可导入 IDEA 中的格式化文件。
+        url: https://github.com/D4mianWayne/PwnLand
+        desc: Collection of Pwn
 
 # config my skills informations in about page.
 # If you don't want to display this `My Skills` content, you can deactivate or delete this configuration.
