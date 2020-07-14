@@ -43,9 +43,9 @@ cover:
 # index page dream text,
 # 配置首页显示"梦想"的语句.
 dream:
-  enable: false
+  enable: true
   showTitle: true
-  title: Dream
+  title: Goal
   text: I want to be a world class pwner, period.
 
 # Whether to display the musics.
