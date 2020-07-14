@@ -192,7 +192,7 @@ myProjects:
       iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
       url: http://github.com/D4mianWayne/roppy
       desc: Pwning Toolkit, I use it for almost everything
-    Fenix:
+    Alfred:
         icon: fas fa-cog
         iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
         url: https://github.com/D4mianWayne/alfred
